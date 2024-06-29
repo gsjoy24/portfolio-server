@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 import config from '../config';
+import userData from '../modules/Profile/profile.constant';
+import Profile from '../modules/Profile/profile.model';
 import { TUser } from '../types/userInfo.types';
 
 const UserSchema = new Schema<TUser>({
@@ -8,9 +10,9 @@ const UserSchema = new Schema<TUser>({
   password: { type: String, required: true },
 });
 
-export const User = model<TUser>('Admin', UserSchema);
+export const User = model<TUser>('User', UserSchema);
 
-const seedSuperAdmin = async () => {
+const seedUser = async () => {
   const password = await bcrypt.hash(
     config.user_password,
     Number(config.bcrypt_salt_round),
@@ -26,6 +28,11 @@ const seedSuperAdmin = async () => {
   if (!userExists) {
     await User.create(data);
   }
+
+  const userProfile = await Profile.findOne();
+  if (!userProfile) {
+    await Profile.create(userData);
+  }
 };
 
-export default seedSuperAdmin;
+export default seedUser;

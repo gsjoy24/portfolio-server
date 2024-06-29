@@ -1,14 +1,14 @@
 import { Server } from 'http';
 import mongoose from 'mongoose';
 import app from './app';
-import seedSuperAdmin from './app/DB';
+import seedUser from './app/DB';
 import config from './app/config';
 
 let server: Server;
 async function main() {
   try {
     await mongoose.connect(config.database_url as string);
-    seedSuperAdmin();
+    seedUser();
     server = app.listen(config.port, () => {
       console.log(`Server for Karukon is listening on port ${config.port}`);
     });
