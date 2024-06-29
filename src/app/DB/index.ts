@@ -1,27 +1,30 @@
+import bcrypt from 'bcrypt';
+import { Schema, model } from 'mongoose';
 import config from '../config';
-import { Admin } from '../modules/Admin/admin.model';
+import { TUserName } from '../types/userInfo.types';
 
-const superAdmin = {
-  name: {
-    firstName: 'Faruk',
-    lastName: 'Rahman',
-  },
-  email: config.super_admin_email,
-  password: config.super_admin_password,
-  gender: 'Male',
-  dateOfBirth: '1998-05-05',
-  contactNo: '+8801914290302',
-  presentAddress: 'Dhaka, Bangladesh',
-  permanentAddress: 'Dhaka, Bangladesh',
-  profileImg: 'https://i.ibb.co/bghqR1x/Spanish.png',
-};
+const UserSchema = new Schema<TUserName>({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+const UserModel = model<TUserName>('Admin', UserSchema);
 
 const seedSuperAdmin = async () => {
-  const isSuperAdminExists = await Admin.findOne({
-    email: config.super_admin_email,
+  const password = await bcrypt.hash(
+    config.user_password,
+    Number(config.bcrypt_salt_round),
+  );
+  const data = {
+    email: config.user_email,
+    password,
+  };
+
+  const userExists = await UserModel.findOne({
+    email: config.user_email,
   });
-  if (!isSuperAdminExists) {
-    await Admin.create(superAdmin);
+  if (!userExists) {
+    await UserModel.create(data);
   }
 };
 
