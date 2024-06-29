@@ -1,14 +1,21 @@
 import bcrypt from 'bcrypt';
 import { Schema, model } from 'mongoose';
 import config from '../config';
-import { TUserName } from '../types/userInfo.types';
+import { TUser, UserModel } from '../types/userInfo.types';
 
-const UserSchema = new Schema<TUserName>({
+const UserSchema = new Schema<TUser>({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 
-const UserModel = model<TUserName>('Admin', UserSchema);
+export const User = model<TUser, UserModel>('Admin', UserSchema);
+
+UserSchema.statics.isPasswordMatched = async function (
+  plainPassword: string,
+  hashedPassword: string,
+) {
+  return await bcrypt.compare(plainPassword, hashedPassword);
+};
 
 const seedSuperAdmin = async () => {
   const password = await bcrypt.hash(
@@ -20,11 +27,11 @@ const seedSuperAdmin = async () => {
     password,
   };
 
-  const userExists = await UserModel.findOne({
+  const userExists = await User.findOne({
     email: config.user_email,
   });
   if (!userExists) {
-    await UserModel.create(data);
+    await User.create(data);
   }
 };
 
