@@ -7,8 +7,16 @@ const LoginValidation = z.object({
   }),
 });
 
+const ChangePasswordValidation = z.object({
+  body: z.object({
+    oldPassword: z.string(),
+    newPassword: z.string(),
+  }),
+});
+
 const AuthValidations = {
   LoginValidation,
+  ChangePasswordValidation,
 };
 
 export default AuthValidations;

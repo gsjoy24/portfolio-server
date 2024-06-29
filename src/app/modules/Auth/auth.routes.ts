@@ -10,6 +10,12 @@ router.post(
   AuthControllers.login,
 );
 
+router.post(
+  '/change-password',
+  validateRequest(AuthValidations.ChangePasswordValidation),
+  AuthControllers.changePassword,
+);
+
 const AuthRoutes = router;
 
 export default AuthRoutes;
