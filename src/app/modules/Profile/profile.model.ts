@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import userData from './profile.constant';
 
-const userSchema = new Schema({
+const profileSchema = new Schema({
   name: { type: String, required: true, default: userData.name },
   designation: { type: String, required: true, default: userData.designation },
   introduction: {
@@ -27,6 +27,6 @@ const userSchema = new Schema({
   resumeLink: { type: String, default: userData.resumeLink },
 });
 
-const Profile = model('Profile', userSchema);
+const Profile = model('Profile', profileSchema);
 
 export default Profile;
