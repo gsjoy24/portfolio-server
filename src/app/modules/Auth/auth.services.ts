@@ -69,8 +69,8 @@ const changePassword = async (
 
   const result = await User.findOneAndUpdate(
     {
-      _id: userData.id,
-      email: userData.email,
+      _id: user.id,
+      email: user.email,
     },
     {
       password: hashedPassword,

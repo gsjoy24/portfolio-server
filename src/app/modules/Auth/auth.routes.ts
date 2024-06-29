@@ -1,4 +1,5 @@
 import express from 'express';
+import AuthGuard from '../../middlewares/AuthGuard';
 import validateRequest from '../../middlewares/validateRequest';
 import AuthControllers from './auth.controller';
 import AuthValidations from './auth.validation';
@@ -12,6 +13,7 @@ router.post(
 
 router.post(
   '/change-password',
+  AuthGuard(),
   validateRequest(AuthValidations.ChangePasswordValidation),
   AuthControllers.changePassword,
 );
