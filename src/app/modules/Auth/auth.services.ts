@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
 import { User } from '../../DB';
 import config from '../../config';
@@ -11,17 +12,14 @@ const login = async (payload: TUser) => {
   // check if the user is exist
   const user = await User.findOne({ email });
   if (!user) {
-    throw new AppError(httpStatus.NOT_FOUND, 'The admin is not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'Enter the correct email!');
   }
 
   // check if the password is correct
-  const isPasswordMatch = await User.isPasswordMatched(
-    password,
-    user?.password,
-  );
+  const isPasswordMatch = await bcrypt.compare(password, user?.password);
 
   if (!isPasswordMatch) {
-    throw new AppError(httpStatus.FORBIDDEN, 'Invalid credentials');
+    throw new AppError(httpStatus.FORBIDDEN, 'Wrong password!');
   }
 
   const jwtPayload = {
