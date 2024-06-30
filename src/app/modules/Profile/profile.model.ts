@@ -1,7 +1,8 @@
 import { Schema, model } from 'mongoose';
 import userData from './profile.constant';
+import { TProfile } from './profile.type';
 
-const profileSchema = new Schema({
+const profileSchema = new Schema<TProfile>({
   name: { type: String, required: true, default: userData.name },
   designation: { type: String, required: true, default: userData.designation },
   introduction: {

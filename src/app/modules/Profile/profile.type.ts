@@ -5,7 +5,7 @@ export type TProfile = {
   profilePicture: string;
   frontEndSkills: string;
   backEndSkills: string;
-  tools: string[];
+  tools: string;
   socialLinks: {
     linkedin: string;
     github: string;
