@@ -4,7 +4,7 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import ProjectsServices from './projects.services';
 
-const createBlog = catchAsync(async (req: Request, res: Response) => {
+const createProject = catchAsync(async (req: Request, res: Response) => {
   const result = await ProjectsServices.createProject(req.body);
 
   sendResponse(res, {
@@ -15,7 +15,7 @@ const createBlog = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getBlog = catchAsync(async (req: Request, res: Response) => {
+const getProject = catchAsync(async (req: Request, res: Response) => {
   const result = await ProjectsServices.getProject(req.params.id);
 
   sendResponse(res, {
@@ -26,7 +26,7 @@ const getBlog = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getBlogs = catchAsync(async (_req: Request, res: Response) => {
+const getProjects = catchAsync(async (_req: Request, res: Response) => {
   const result = await ProjectsServices.getProjects();
 
   sendResponse(res, {
@@ -37,7 +37,7 @@ const getBlogs = catchAsync(async (_req: Request, res: Response) => {
   });
 });
 
-const updateBlog = catchAsync(async (req: Request, res: Response) => {
+const updateProject = catchAsync(async (req: Request, res: Response) => {
   const result = await ProjectsServices.updateProject(req.params.id, req.body);
 
   sendResponse(res, {
@@ -48,7 +48,7 @@ const updateBlog = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const deleteBlog = catchAsync(async (req: Request, res: Response) => {
+const deleteProject = catchAsync(async (req: Request, res: Response) => {
   const result = await ProjectsServices.deleteProject(req.params.id);
 
   sendResponse(res, {
@@ -60,11 +60,11 @@ const deleteBlog = catchAsync(async (req: Request, res: Response) => {
 });
 
 const ProjectsControllers = {
-  createBlog,
-  getBlog,
-  getBlogs,
-  updateBlog,
-  deleteBlog,
+  createProject,
+  getProject,
+  getProjects,
+  updateProject,
+  deleteProject,
 };
 
 export default ProjectsControllers;
