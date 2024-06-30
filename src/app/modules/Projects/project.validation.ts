@@ -1,15 +1,3 @@
-// const projectSchema = new Schema<TProject>({
-//   title: { type: String, required: true },
-//   description: { type: String, required: true },
-//   frontEndTech: { type: String },
-//   backEndTech: { type: String },
-//   frontEndRepo: { type: String },
-//   backEndRepo: { type: String },
-//   liveLink: { type: String },
-//   image: { type: String },
-//   duration: { type: String },
-// });
-
 import { z } from 'zod';
 
 const createProjectValidation = z.object({

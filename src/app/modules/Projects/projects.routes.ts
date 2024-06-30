@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post(
   '/',
-  AuthGuard,
+  AuthGuard(),
   validateRequest(ProjectValidations.createProjectValidation),
   projectsController.createProject,
 );
@@ -16,11 +16,11 @@ router.get('/', projectsController.getProjects);
 router.get('/:id', projectsController.getProject);
 router.put(
   '/:id',
-  AuthGuard,
+  AuthGuard(),
   validateRequest(ProjectValidations.updateProjectValidation),
   projectsController.updateProject,
 );
-router.delete('/:id', AuthGuard, projectsController.deleteProject);
+router.delete('/:id', AuthGuard(), projectsController.deleteProject);
 
 const projectsRoutes = router;
 
