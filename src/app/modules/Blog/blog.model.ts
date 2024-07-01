@@ -4,6 +4,7 @@ import { TBlog } from './blog.types';
 const blogSchema = new Schema<TBlog>({
   title: { type: String, required: true },
   content: { type: String, required: true },
+  image: { type: String, required: true },
   publicationDate: { type: Date, default: Date.now },
 });
 
