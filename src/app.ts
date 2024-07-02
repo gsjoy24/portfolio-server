@@ -7,6 +7,8 @@ import router from './app/routes';
 const app: Application = express();
 const allowedOrigins = [
   'http://localhost:3000',
+  'http://localhost:5173',
+  'https://portfoliopanel-joy.vercel.app',
   'https://goursahajoy.vercel.app',
 ];
 app.use(

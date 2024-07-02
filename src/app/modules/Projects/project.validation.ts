@@ -11,9 +11,7 @@ const createProjectValidation = z.object({
     frontEndTech: z.string({
       required_error: 'Frontend technology is required',
     }),
-    backEndTech: z.string({
-      required_error: 'Backend technology is required',
-    }),
+    backEndTech: z.string().optional(),
     frontEndRepo: z.string().optional(),
     backEndRepo: z.string().optional(),
     liveLink: z.string({
