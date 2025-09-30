@@ -10,6 +10,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'https://portfoliopanel-joy.vercel.app',
   'https://goursahajoy.vercel.app',
+  'http://joy.vertoone.com'
 ];
 app.use(
   cors({
